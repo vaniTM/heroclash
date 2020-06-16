@@ -1,0 +1,18 @@
+* {
+    border: 1px solid darkred;
+}
+
+body {
+    display: grid;
+    grid-template-areas:
+    "header header header header header"
+    ". card1 . card2 .";
+    height: 99vh;
+    margin: 0;
+}
+
+header {
+    grid-area: header;
+    display: flex;
+    justify-content: center;
+}
