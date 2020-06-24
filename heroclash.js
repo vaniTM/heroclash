@@ -18,23 +18,40 @@ class Heroclash {
     for (let i = 0; i < numberOfCards; i++) {
       let id = Math.floor(Math.random() * 731 + 1);
       while (!ids.includes(id)) {
-        this.stats1.push(herodata[id]);
-        this.images1.push(images[id]);
-        ids.push(id);
+        if (this.validStats(herodata[id])) {
+          this.stats1.push(herodata[id]);
+          this.images1.push(images[id]);
+          ids.push(id);
+        }
       }
       id = Math.floor(Math.random() * 731 + 1);
       while (!ids.includes(id)) {
-        this.stats2.push(herodata[id]);
-        this.images2.push(images[id]);
-        ids.push(id);
+        if (this.validStats(herodata[id])) {
+          this.stats2.push(herodata[id]);
+          this.images2.push(images[id]);
+          ids.push(id);
+        }
       }
     }
+  }
+
+  //TODO: not working! :(
+  validStats(hero) {
+    for (let key in hero) {
+      if (hero.key === null) {
+        return false;
+      }
+    }
+    return true;
   }
 }
 
 const game = new Heroclash();
+
 game.init(3);
 console.log(game.stats1);
 console.log(game.images1);
 console.log(game.stats2);
 console.log(game.images2);
+
+game.validStats(game.stats1[0]);
