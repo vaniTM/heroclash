@@ -1,26 +1,40 @@
-const http = new EasyHTTP();
+class Heroclash {
+  stats1 = [];
+  stats2 = [];
+  images1 = [];
+  images2 = [];
 
-//Get one random character:
-async function randomCharacter() {
-  const id = Math.floor(Math.random() * 731 + 1);
-  const response = await http.get(
-    `https://cors-anywhere.herokuapp.com/https://superheroapi.com/api/3521494294562439/${id}`
-    // "heroes.json"
-    // "herostats.json"
-  );
-  console.log(response);
-  return response;
+  async init(numberOfCards) {
+    // fetch herostats:
+    let response = await fetch("herostats.json");
+    const herodata = await response.json();
+
+    // fetch image-urls:
+    response = await fetch("heroimages.json");
+    const images = await response.json();
+
+    let ids = [];
+
+    for (let i = 0; i < numberOfCards; i++) {
+      let id = Math.floor(Math.random() * 731 + 1);
+      while (!ids.includes(id)) {
+        this.stats1.push(herodata[id]);
+        this.images1.push(images[id]);
+        ids.push(id);
+      }
+      id = Math.floor(Math.random() * 731 + 1);
+      while (!ids.includes(id)) {
+        this.stats2.push(herodata[id]);
+        this.images2.push(images[id]);
+        ids.push(id);
+      }
+    }
+  }
 }
 
-document
-  .getElementById("randomHero")
-  .addEventListener("click", randomCharacter);
-
-class Game {
-  player1 = new Player();
-  player2 = new Player();
-}
-
-class Player {
-  Player() {}
-}
+const game = new Heroclash();
+game.init(3);
+console.log(game.stats1);
+console.log(game.images1);
+console.log(game.stats2);
+console.log(game.images2);
