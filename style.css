@@ -49,7 +49,8 @@ button {
   height: 80vh;
 }
 
-#image1, #image2 {
+#image1,
+#image2 {
   max-width: 100%;
   max-height: 100%;
   border-radius: 5px;
@@ -85,9 +86,9 @@ button {
 }
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
-.card:hover .card-inner {
+/* .card:hover .card-inner {
   transform: rotateY(180deg);
-}
+} */
 
 /* Position the front and back side */
 .card-front,

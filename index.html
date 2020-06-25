@@ -14,7 +14,7 @@
     <main>
       <div class="gamescreen">
         <div class="card">
-          <div class="card-inner">
+          <div class="card-inner" id="card-inner1">
             <div class="card-front">
               <img
                 src="images/card-red.png"
@@ -34,17 +34,23 @@
                 <h2>Lex Luthor</h2>
 
                 <ul>
-                  <li>
+                  <li id="intelligence1">
                     <i class="fas fa-brain"> </i>Intelligence<span
                       style="margin-left: auto;"
                       >100</span
                     >
                   </li>
-                  <li><i class="fas fa-dumbbell"></i>Strength</li>
-                  <li><i class="fas fa-tachometer-alt"></i>Speed</li>
-                  <li><i class="fas fa-shield-alt"></i>Durability</li>
-                  <li><i class="fas fa-fist-raised"></i>Power</li>
-                  <li><i class="fas fa-khanda"></i>Combat</li>
+                  <li id="strength1">
+                    <i class="fas fa-dumbbell"></i>Strength
+                  </li>
+                  <li id="speed1">
+                    <i class="fas fa-tachometer-alt"></i>Speed
+                  </li>
+                  <li id="durability1">
+                    <i class="fas fa-shield-alt"></i>Durability
+                  </li>
+                  <li id="power1"><i class="fas fa-fist-raised"></i>Power</li>
+                  <li id="combat1"><i class="fas fa-khanda"></i>Combat</li>
                 </ul>
               </div>
             </div>
@@ -52,7 +58,7 @@
         </div>
 
         <div class="card">
-          <div class="card-inner">
+          <div class="card-inner" id="card-inner2">
             <div class="card-front">
               <img
                 src="images/card-red.png"
@@ -72,12 +78,18 @@
                 <h2>Loki</h2>
 
                 <ul>
-                  <li>
+                  <li id="intelligence2">
                     <i class="fas fa-brain"> </i> <span>Intelligence</span>
                   </li>
-                  <li><i class="fas fa-dumbbell"></i>Strength</li>
-                  <li><i class="fas fa-tachometer-alt"></i>Speed</li>
-                  <li><i class="fas fa-shield-alt"></i>Durability</li>
+                  <li id="strength2">
+                    <i class="fas fa-dumbbell"></i>Strength
+                  </li>
+                  <li id="speed2">
+                    <i class="fas fa-tachometer-alt"></i>Speed
+                  </li>
+                  <li id="durability2">
+                    <i class="fas fa-shield-alt"></i>Durability
+                  </li>
                   <li><i class="fas fa-fist-raised"></i>Power</li>
                   <li><i class="fas fa-khanda"></i>Combat</li>
                 </ul>
@@ -86,9 +98,11 @@
           </div>
         </div>
       </div>
+      <button id="next">Next Card</button>
     </main>
 
     <script src="heroclash.js"></script>
+    <script src="ui.js"></script>
     <script
       src="https://kit.fontawesome.com/2a03a4bc63.js"
       crossorigin="anonymous"
