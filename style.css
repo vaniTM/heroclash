@@ -121,6 +121,7 @@ button {
   max-height: 100%;
   flex-direction: column;
   justify-content: flex-start;
+  white-space: nowrap;
   width: 150px;
 }
 

@@ -6,7 +6,7 @@ class UI {
   image1 = document.querySelector("#image1");
   image2 = document.querySelector("#image2");
 
-  //stats:
+  //stats (to display card values):
   intelligence1 = document.querySelector("#intelligence1");
   strength1 = document.querySelector("#strength1");
   speed1 = document.querySelector("#speed1");
@@ -20,6 +20,14 @@ class UI {
   durability2 = document.querySelector("#durability2");
   power2 = document.querySelector("#power2");
   combat2 = document.querySelector("#combat2");
+
+  //stat classes (for clicks to choose next duel discipline):
+  intelligence = document.querySelectorAll(".intelligence");
+  strength = document.querySelectorAll(".strength");
+  speed = document.querySelectorAll(".speed");
+  durability = document.querySelectorAll(".durability");
+  power = document.querySelectorAll(".power");
+  combat = document.querySelectorAll(".combat");
 
   //set event handlers
 
@@ -78,18 +86,22 @@ class UI {
     `;
   };
 
-  // turnCard(card) {
-  //   card.style.transform = "rotateY(180deg)";
-  // }
+  turnCard() {
+    if (this.classList.contains("active")) {
+      this.style.transform = "";
+      this.classList.remove("active");
+    } else {
+      this.style.transform = "rotateY(180deg)";
+      this.classList.add("active");
+    }
+  }
 }
 
 ui = new UI();
-//rotate cards on click
-document.getElementById("card-inner1").addEventListener("click", function () {
-  this.style.transform = "rotateY(180deg)";
-});
-document.getElementById("card-inner2").addEventListener("click", function () {
-  this.style.transform = "rotateY(180deg)";
-});
 
-document.getElementById("next").addEventListener("click", ui.updateCards);
+//rotate cards on click
+document.querySelector("#card-inner1").addEventListener("click", ui.turnCard);
+document.querySelector("#card-inner2").addEventListener("click", ui.turnCard);
+
+//update cards
+document.querySelector("#next").addEventListener("click", ui.updateCards);
