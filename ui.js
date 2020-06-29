@@ -1,6 +1,8 @@
 // Copyright (C) 2020  Markus Seiwald, GPLv3
 
 class UI {
+  game;
+
   //cards:
   cards = document.querySelectorAll(".card");
 
@@ -34,19 +36,25 @@ class UI {
   //set event handlers
 
   constructor() {
-    const game = new Heroclash();
+    this.game = new Heroclash();
 
     if (localStorage.getItem("allHeroes") === null) {
-      game.loadData();
+      this.game.loadData().then(location.reload);
     }
-    game.start(3);
+    this.game.start(3);
+    this.startTurn();
+    this.updateCards();
 
-    console.log(game);
+    console.log(this.game);
   }
 
-  updateCards = function () {
-    document.getElementById("card-inner1").innerHTML = `
-    <div class="card-front">
+  updateCards() {
+    let cards = document.querySelectorAll(".card-inner");
+    cards.forEach((card, index) => {
+      let playerNumber = index + 1;
+      let activeCard = this.game.players[index].activeCard;
+      card.innerHTML = `
+            <div class="card-front">
               <img
                 src="images/card-red.png"
                 width="330px"
@@ -57,52 +65,64 @@ class UI {
               <div class="card-image">
                 <img
                   id="image1"
-                  src="https://www.superherodb.com/pictures2/portraits/10/100/727.jpg"
+                  src="${activeCard.image}"
                   alt="Avatar"
                 />
               </div>
               <div id="stats1" class="stats">
-                <h2>This is just a way too long name...</h2>
+                <h2>${activeCard.name}</h2>
   
                 <ul>
                   <li id="intelligence1">
-                    <i class="fas fa-brain"> </i>Intelligence<span
-                      style="margin-left: auto;"
-                      >100</span
-                    >
+                    <i class="fas fa-brain"> </i>Intelligence
+                    <span style="margin-left: auto;">${activeCard.intelligence}</span>
                   </li>
                   <li id="strength1">
                     <i class="fas fa-dumbbell"></i>Strength
+                    <span style="margin-left: auto;">${activeCard.strength}</span>
                   </li>
                   <li id="speed1">
                     <i class="fas fa-tachometer-alt"></i>Speed
+                    <span style="margin-left: auto;">${activeCard.speed}</span>
                   </li>
                   <li id="durability1">
                     <i class="fas fa-shield-alt"></i>Durability
+                    <span style="margin-left: auto;">${activeCard.durability}</span>
                   </li>
-                  <li id="power1"><i class="fas fa-fist-raised"></i>Power</li>
-                  <li id="combat1"><i class="fas fa-khanda"></i>Combat</li>
+                  <li id="power1"><i class="fas fa-fist-raised"></i>Power
+                  <span style="margin-left: auto;">${activeCard.power}</span>
+                  </li>
+                  <li id="combat1"><i class="fas fa-khanda"></i>Combat
+                  <span style="margin-left: auto;">${activeCard.combat}</span>
+                  </li>
                 </ul>
               </div>
     `;
-  };
+    });
+  }
 
-  turnCard() {
-    if (this.classList.contains("active")) {
-      this.style.transform = "";
-      this.classList.remove("active");
+  turnCard(card) {
+    if (card.classList.contains("active")) {
+      card.style.transform = "";
+      card.classList.remove("active");
     } else {
-      this.style.transform = "rotateY(180deg)";
-      this.classList.add("active");
+      card.style.transform = "rotateY(180deg)";
+      card.classList.add("active");
     }
+  }
+
+  startTurn() {
+    this.game.players[0].initiative === true
+      ? this.turnCard(document.querySelector("#card-inner1"))
+      : this.turnCard(document.querySelector("#card-inner2"));
   }
 }
 
 ui = new UI();
 
 //rotate cards on click
-document.querySelector("#card-inner1").addEventListener("click", ui.turnCard);
-document.querySelector("#card-inner2").addEventListener("click", ui.turnCard);
+// document.querySelector("#card-inner1").addEventListener("click", ui.turnCard);
+// document.querySelector("#card-inner2").addEventListener("click", ui.turnCard);
 
 //update cards
-document.querySelector("#next").addEventListener("click", ui.updateCards);
+// document.querySelector("#next").addEventListener("click", ui.updateCards);

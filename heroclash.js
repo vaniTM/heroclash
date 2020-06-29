@@ -21,7 +21,7 @@ class Heroclash {
     //save to localStorage
     localStorage.setItem("allHeroes", JSON.stringify(herodata));
     localStorage.setItem("allImages", JSON.stringify(images));
-    location.reload();
+    // location.reload();
   }
 
   //start the game with the chosen deckSize
@@ -55,7 +55,15 @@ class Heroclash {
           ids.push(id);
         }
       }
+      //draw first card:
+      player.activeCard = player.deck.pop();
     });
+
+    //decide who starts:
+    Math.random() < 0.5
+      ? (this.players[0].initiative = false)
+      : (this.players[1].initiative = false);
+
   }
 
   //checks if hero-stats contain a null-value
@@ -81,16 +89,8 @@ class Player {
     this.name = name;
     this.deck = [];
     this.initiative = true;
+    this.activeCard = null;
   }
 }
 
-//-------------------------------------------------------------------
-
-// const game = new Heroclash();
-// // if (localStorage.getItem("allHeroes") === null) {
-// //   game.loadData();
-// // }
-// // game.start(3);
-
-// console.log(game.stats1);
-// console.log(game.stats2);
+//------------------------------------------------------------------
