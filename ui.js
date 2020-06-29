@@ -41,8 +41,7 @@ class UI {
     }
     game.start(3);
 
-    console.log(game.stats1);
-    console.log(game.stats2);
+    console.log(game);
   }
 
   updateCards = function () {
@@ -63,7 +62,7 @@ class UI {
                 />
               </div>
               <div id="stats1" class="stats">
-                <h2>Someone Else</h2>
+                <h2>This is just a way too long name...</h2>
   
                 <ul>
                   <li id="intelligence1">

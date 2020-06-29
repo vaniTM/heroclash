@@ -1,10 +1,12 @@
 // Copyright (C) 2020  Markus Seiwald, GPLv3
 
 class Heroclash {
-  stats1 = [];
-  stats2 = [];
-  images1 = [];
-  images2 = [];
+  players = [];
+
+  constructor() {
+    this.players.push(new Player("Player 1"));
+    this.players.push(new Player("Player 2"));
+  }
 
   //load data from json-file and save to localStorage
   async loadData() {
@@ -31,33 +33,29 @@ class Heroclash {
     herodata = JSON.parse(localStorage.getItem("allHeroes"));
     images = JSON.parse(localStorage.getItem("allImages"));
 
+    //merge data from images into herodata:
+    herodata.forEach((hero, index) => {
+      let image = images[index].url;
+      hero.image = image;
+    });
+
+    //store the id of all drawn characters:
     let ids = [];
 
-    //refactoring needed! nasty code duplication
-    while (this.stats1.length < deckSize) {
-      let id = Math.floor(Math.random() * 731);
-      while (!ids.includes(id)) {
-        if (this.validStats(herodata[id])) {
-          this.stats1.push(herodata[id]);
-          this.images1.push(images[id]);
-        } else {
-          id = (id + 1) % 731;
+    //draw the decks for the players:
+    this.players.forEach((player) => {
+      while (player.deck.length < deckSize) {
+        let id = Math.floor(Math.random() * 731);
+        while (!ids.includes(id)) {
+          if (this.validStats(herodata[id])) {
+            player.deck.push(herodata[id]);
+          } else {
+            id = (id + 1) % 731;
+          }
+          ids.push(id);
         }
-        ids.push(id);
       }
-    }
-    while (this.stats2.length < deckSize) {
-      let id = Math.floor(Math.random() * 731);
-      while (!ids.includes(id)) {
-        if (this.validStats(herodata[id])) {
-          this.stats2.push(herodata[id]);
-          this.images2.push(images[id]);
-        } else {
-          id = (id + 1) % 731;
-        }
-        ids.push(id);
-      }
-    }
+    });
   }
 
   //checks if hero-stats contain a null-value
@@ -78,7 +76,13 @@ class Heroclash {
 }
 
 //-------------------------------------------------------------------
-class Player {}
+class Player {
+  constructor(name) {
+    this.name = name;
+    this.deck = [];
+    this.initiative = true;
+  }
+}
 
 //-------------------------------------------------------------------
 
