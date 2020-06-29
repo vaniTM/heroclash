@@ -1,3 +1,5 @@
+// Copyright (C) 2020  Markus Seiwald, GPLv3
+
 class Heroclash {
   stats1 = [];
   stats2 = [];

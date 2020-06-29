@@ -1,3 +1,5 @@
+// Copyright (C) 2020  Markus Seiwald, GPLv3
+
 class UI {
   //cards:
   cards = document.querySelectorAll(".card");
