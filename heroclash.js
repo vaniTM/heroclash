@@ -50,7 +50,8 @@ class Heroclash {
           if (this.validStats(herodata[id])) {
             player.deck.push(herodata[id]);
           } else {
-            id = (id + 1) % 731;
+            id = Math.floor(Math.random() * 731);
+            continue;
           }
           ids.push(id);
         }
@@ -63,7 +64,6 @@ class Heroclash {
     Math.random() < 0.5
       ? (this.players[0].initiative = false)
       : (this.players[1].initiative = false);
-
   }
 
   //checks if hero-stats contain a null-value

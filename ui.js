@@ -57,7 +57,7 @@ class UI {
             <div class="card-front">
               <img
                 src="images/card-red.png"
-                width="330px"
+                width="330"
                 alt="A red Playing Card"
               />
             </div>
