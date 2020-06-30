@@ -11,3 +11,4 @@ This project is licensed under the terms of the GNU GPLv3 license.
 - SuperheroAPI (https://www.superheroapi.com/)
 - Heroku Cors Anywhere (https://cors-anywhere.herokuapp.com/)
 - Tutorials and Udemy Courses by Brad Traversy (https://traversymedia.com/)
+- W3Schools

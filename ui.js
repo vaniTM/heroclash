@@ -64,36 +64,38 @@ class UI {
             <div class="card-back">
               <div class="card-image">
                 <img
-                  id="image1"
+                  class="image"
                   src="${activeCard.image}"
                   alt="Avatar"
                 />
               </div>
-              <div id="stats1" class="stats">
+              <div class="stats">
                 <h2>${activeCard.name}</h2>
   
                 <ul>
-                  <li id="intelligence1">
+                  <li class="intelligence">
                     <i class="fas fa-brain"> </i>Intelligence
                     <span style="margin-left: auto;">${activeCard.intelligence}</span>
                   </li>
-                  <li id="strength1">
+                  <li class="strength">
                     <i class="fas fa-dumbbell"></i>Strength
                     <span style="margin-left: auto;">${activeCard.strength}</span>
                   </li>
-                  <li id="speed1">
+                  <li class="speed">
                     <i class="fas fa-tachometer-alt"></i>Speed
                     <span style="margin-left: auto;">${activeCard.speed}</span>
                   </li>
-                  <li id="durability1">
+                  <li class="durability">
                     <i class="fas fa-shield-alt"></i>Durability
                     <span style="margin-left: auto;">${activeCard.durability}</span>
                   </li>
-                  <li id="power1"><i class="fas fa-fist-raised"></i>Power
-                  <span style="margin-left: auto;">${activeCard.power}</span>
+                  <li class="power">
+                    <i class="fas fa-fist-raised"></i>Power
+                    <span style="margin-left: auto;">${activeCard.power}</span>
                   </li>
-                  <li id="combat1"><i class="fas fa-khanda"></i>Combat
-                  <span style="margin-left: auto;">${activeCard.combat}</span>
+                  <li class="combat">
+                    <i class="fas fa-khanda"></i>Combat
+                    <span style="margin-left: auto;">${activeCard.combat}</span>
                   </li>
                 </ul>
               </div>
@@ -119,6 +121,10 @@ class UI {
 }
 
 ui = new UI();
+let stats = document.querySelectorAll(".stats");
+stats.forEach((element) =>
+  element.addEventListener("click", (event) => console.log(event.target))
+);
 
 //rotate cards on click
 // document.querySelector("#card-inner1").addEventListener("click", ui.turnCard);

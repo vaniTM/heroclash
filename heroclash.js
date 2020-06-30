@@ -81,6 +81,10 @@ class Heroclash {
     }
     return validStats;
   }
+
+  handleCombat(discipline) {
+    let p1 = this.players[0].console.log(values);
+  }
 }
 
 //-------------------------------------------------------------------
