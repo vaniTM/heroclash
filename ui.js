@@ -18,8 +18,9 @@ class UI {
     if (localStorage.getItem("allHeroes") === null) {
       this.game.loadData().then(location.reload);
     }
-    this.game.start(3);
+    this.game.start(15);
 
+    this.updateState();
     this.startTurn();
     this.updateCards();
 
@@ -44,12 +45,23 @@ class UI {
           that.turnCard(document.querySelector("#card-inner1"));
           that.turnCard(document.querySelector("#card-inner2"));
           setTimeout(function () {
+            that.updateState();
             that.updateCards();
             that.startTurn();
           }, 1000);
         }, 2000);
       })
     );
+  }
+
+  updateState() {
+    const container = document.querySelector("#game-state");
+    container.innerHTML = `
+    <h2>P1: ${this.game.players[0].deck.length + 1}</h2>
+    <h3>Heap: ${this.game.heap.length}</h3>
+    <h2>P2: ${this.game.players[1].deck.length + 1}</h2>
+
+    `;
   }
 
   //display the active card of the two players:

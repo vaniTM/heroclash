@@ -86,19 +86,22 @@ class Heroclash {
   handleCombat(discipline) {
     const p1 = this.players[0];
     const p2 = this.players[1];
+
+    //TODO: create function determineWinner
     const result = p1.activeCard[discipline] - p2.activeCard[discipline];
 
+    //TODO: refactor with result from determineWinner:
     if (result > 0) {
       p1.deck.push(this.players[0].activeCard);
       p1.deck.push(this.players[1].activeCard);
-      p1.deck.push(this.heap);
+      p1.deck = p1.deck.concat(this.heap);
       this.heap.length = 0;
       p1.initiative = true;
       p2.initiative = false;
     } else if (result < 0) {
       p2.deck.push(this.players[0].activeCard);
       p2.deck.push(this.players[1].activeCard);
-      p2.deck.push(this.heap);
+      p2.deck = p2.deck.concat(this.heap);
       this.heap.length = 0;
       p1.initiative = false;
       p2.initiative = true;

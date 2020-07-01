@@ -180,6 +180,17 @@ html {
   }
 } */
 
+#game-state {
+  max-width: 330px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-state * {
+  margin: 20px;
+}
+
 @media only screen and (max-width: 460px) {
   html {
     font-size: 80%;
