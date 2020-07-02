@@ -32,24 +32,33 @@ class UI {
       element.addEventListener("click", (event) => {
         console.log(event.target.classList[0]);
 
-        if (element.id === "card-inner1") {
-          this.turnCard(document.querySelector("#card-inner2"));
-        }
-        if (element.id === "card-inner2") {
-          this.turnCard(document.querySelector("#card-inner1"));
-        }
+        if (event.target.classList[0] === "image") {
+          if (element.id === "card-inner1") {
+            this.displayBio(this.game.players[0].deck[0].id);
+          }
+          if (element.id === "card-inner2") {
+            this.displayBio(this.game.players[1].deck[0].id);
+          }
+        } else {
+          if (element.id === "card-inner1") {
+            this.turnCard(document.querySelector("#card-inner2"));
+          }
+          if (element.id === "card-inner2") {
+            this.turnCard(document.querySelector("#card-inner1"));
+          }
 
-        let that = this;
-        setTimeout(function () {
-          that.game.handleCombat(event.target.classList[0]);
-          that.turnCard(document.querySelector("#card-inner1"));
-          that.turnCard(document.querySelector("#card-inner2"));
+          let that = this;
           setTimeout(function () {
-            that.updateState();
-            that.updateCards();
-            that.startTurn();
-          }, 1000);
-        }, 2000);
+            that.game.handleCombat(event.target.classList[0]);
+            that.turnCard(document.querySelector("#card-inner1"));
+            that.turnCard(document.querySelector("#card-inner2"));
+            setTimeout(function () {
+              that.updateState();
+              that.updateCards();
+              that.startTurn();
+            }, 1000);
+          }, 1700);
+        }
       })
     );
   }
@@ -75,6 +84,8 @@ class UI {
     let cards = document.querySelectorAll(".card-inner");
     cards.forEach((card, index) => {
       let activeCard = this.game.players[index].deck[0];
+      let stats = this.game.players[index].deck[0].powerstats;
+      let images = this.game.players[index].deck[0].images;
       card.innerHTML = `
             <div class="card-front">
               <img
@@ -87,7 +98,7 @@ class UI {
               <div class="card-image">
                 <img
                   class="image"
-                  src="${activeCard.image}"
+                  src="${images.md}"
                   alt="Avatar"
                 />
               </div>
@@ -97,27 +108,27 @@ class UI {
                 <ul>
                   <li class="intelligence">
                     <i class="fas fa-brain"> </i>Intelligence
-                    <span style="margin-left: auto;">${activeCard.intelligence}</span>
+                    <span style="margin-left: auto;">${stats.intelligence}</span>
                   </li>
                   <li class="strength">
                     <i class="fas fa-dumbbell"></i>Strength
-                    <span style="margin-left: auto;">${activeCard.strength}</span>
+                    <span style="margin-left: auto;">${stats.strength}</span>
                   </li>
                   <li class="speed">
                     <i class="fas fa-tachometer-alt"></i>Speed
-                    <span style="margin-left: auto;">${activeCard.speed}</span>
+                    <span style="margin-left: auto;">${stats.speed}</span>
                   </li>
                   <li class="durability">
                     <i class="fas fa-shield-alt"></i>Durability
-                    <span style="margin-left: auto;">${activeCard.durability}</span>
+                    <span style="margin-left: auto;">${stats.durability}</span>
                   </li>
                   <li class="power">
                     <i class="fas fa-fist-raised"></i>Power
-                    <span style="margin-left: auto;">${activeCard.power}</span>
+                    <span style="margin-left: auto;">${stats.power}</span>
                   </li>
                   <li class="combat">
                     <i class="fas fa-khanda"></i>Combat
-                    <span style="margin-left: auto;">${activeCard.combat}</span>
+                    <span style="margin-left: auto;">${stats.combat}</span>
                   </li>
                 </ul>
               </div>
@@ -140,6 +151,15 @@ class UI {
     this.game.players[0].initiative === true
       ? this.turnCard(document.querySelector("#card-inner1"))
       : this.turnCard(document.querySelector("#card-inner2"));
+  }
+
+  displayBio(id) {
+    // const modal = document.querySelector("#myModal");
+    // modal.style.display = "block";
+    // const span = document.querySelector(".close");
+    // span.onclick = function () {
+    //   modal.style.display = "none";
+    // };
   }
 }
 

@@ -19,9 +19,13 @@ class Heroclash {
     response = await fetch("heroimages.json");
     const images = await response.json();
 
+    response = await fetch("heroes.json");
+    const heroes = await response.json();
+
     //save to localStorage
     localStorage.setItem("allHeroes", JSON.stringify(herodata));
     localStorage.setItem("allImages", JSON.stringify(images));
+    localStorage.setItem("heroes", JSON.stringify(heroes));
     // location.reload();
   }
 
@@ -29,10 +33,12 @@ class Heroclash {
   start(deckSize) {
     let herodata;
     let images;
+    let heroes;
 
     //load herodata from localStorage
     herodata = JSON.parse(localStorage.getItem("allHeroes"));
     images = JSON.parse(localStorage.getItem("allImages"));
+    heroes = JSON.parse(localStorage.getItem("heroes"));
 
     //merge data from images into herodata:
     herodata.forEach((hero, index) => {
@@ -46,14 +52,9 @@ class Heroclash {
     //draw the decks for the players:
     this.players.forEach((player) => {
       while (player.deck.length < deckSize) {
-        let id = Math.floor(Math.random() * 731);
+        let id = Math.floor(Math.random() * 563);
         while (!ids.includes(id)) {
-          if (this.validStats(herodata[id])) {
-            player.deck.push(herodata[id]);
-          } else {
-            id = Math.floor(Math.random() * 731);
-            continue;
-          }
+          player.deck.push(heroes[id]);
           ids.push(id);
         }
       }
@@ -65,28 +66,14 @@ class Heroclash {
       : (this.players[1].initiative = false);
   }
 
-  //checks if hero-stats contain a null-value
-  validStats(hero) {
-    let validStats = true;
-    if (
-      hero.intelligence === "null" ||
-      hero.durability === "null" ||
-      hero.speed === "null" ||
-      hero.strength === "null" ||
-      hero.combat === "null" ||
-      hero.power === "null"
-    ) {
-      validStats = false;
-    }
-    return validStats;
-  }
-
   handleCombat(discipline) {
+    const stats1 = this.players[0].deck[0].powerstats;
+    const stats2 = this.players[1].deck[0].powerstats;
+
     const p1 = this.players[0];
     const p2 = this.players[1];
 
-    //TODO: create function determineWinner
-    const result = p1.deck[0][discipline] - p2.deck[0][discipline];
+    const result = stats1[discipline] - stats2[discipline];
 
     //TODO: refactor with result from determineWinner:
     if (result > 0) {
