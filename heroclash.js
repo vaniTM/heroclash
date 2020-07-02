@@ -57,8 +57,6 @@ class Heroclash {
           ids.push(id);
         }
       }
-      //draw first card:
-      player.activeCard = player.deck.pop();
     });
 
     //decide who starts:
@@ -88,27 +86,27 @@ class Heroclash {
     const p2 = this.players[1];
 
     //TODO: create function determineWinner
-    const result = p1.activeCard[discipline] - p2.activeCard[discipline];
+    const result = p1.deck[0][discipline] - p2.deck[0][discipline];
 
     //TODO: refactor with result from determineWinner:
     if (result > 0) {
-      p1.deck.push(this.players[0].activeCard);
-      p1.deck.push(this.players[1].activeCard);
+      p1.deck.push(this.players[0].deck.shift());
+      p1.deck.push(this.players[1].deck.shift());
       p1.deck = p1.deck.concat(this.heap);
       this.heap.length = 0;
       p1.initiative = true;
       p2.initiative = false;
     } else if (result < 0) {
-      p2.deck.push(this.players[0].activeCard);
-      p2.deck.push(this.players[1].activeCard);
+      p2.deck.push(this.players[0].deck.shift());
+      p2.deck.push(this.players[1].deck.shift());
       p2.deck = p2.deck.concat(this.heap);
       this.heap.length = 0;
       p1.initiative = false;
       p2.initiative = true;
     } else {
-      this.heap.push(p1.activeCard);
       this.heap.push(p1.deck.shift());
-      this.heap.push(p2.activeCard);
+      this.heap.push(p1.deck.shift());
+      this.heap.push(p2.deck.shift());
       this.heap.push(p2.deck.shift());
       if (p1.initiative === true) {
         p1.initiative = false;
@@ -118,9 +116,6 @@ class Heroclash {
         p2.initiative = false;
       }
     }
-
-    p1.activeCard = p1.deck.shift();
-    p2.activeCard = p2.deck.shift();
   }
 }
 
@@ -130,6 +125,5 @@ class Player {
     this.name = name;
     this.deck = [];
     this.initiative = true;
-    this.activeCard = null;
   }
 }

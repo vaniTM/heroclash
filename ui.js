@@ -56,19 +56,25 @@ class UI {
 
   updateState() {
     const container = document.querySelector("#game-state");
-    container.innerHTML = `
-    <h2>P1: ${this.game.players[0].deck.length + 1}</h2>
+    if (this.game.players[0].deck.length === 0) {
+      container.innerHTML = "GAME OVER - PLAYER 2 WINS!";
+    } else if (this.game.players[1].deck.length === 0) {
+      container.innerHTML = "GAME OVER - PLAYER 1 WINS!";
+    } else {
+      container.innerHTML = `
+    <h2>P1: ${this.game.players[0].deck.length}</h2>
     <h3>Heap: ${this.game.heap.length}</h3>
-    <h2>P2: ${this.game.players[1].deck.length + 1}</h2>
+    <h2>P2: ${this.game.players[1].deck.length}</h2>
 
     `;
+    }
   }
 
   //display the active card of the two players:
   updateCards() {
     let cards = document.querySelectorAll(".card-inner");
     cards.forEach((card, index) => {
-      let activeCard = this.game.players[index].activeCard;
+      let activeCard = this.game.players[index].deck[0];
       card.innerHTML = `
             <div class="card-front">
               <img
@@ -87,7 +93,7 @@ class UI {
               </div>
               <div class="stats">
                 <h2>${activeCard.name}</h2>
-  
+
                 <ul>
                   <li class="intelligence">
                     <i class="fas fa-brain"> </i>Intelligence
