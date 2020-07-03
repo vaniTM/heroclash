@@ -34,10 +34,10 @@ class UI {
 
         if (event.target.classList[0] === "image") {
           if (element.id === "card-inner1") {
-            this.displayBio(this.game.players[0].deck[0].id);
+            this.displayBio(this.game.players[0].deck[0]);
           }
           if (element.id === "card-inner2") {
-            this.displayBio(this.game.players[1].deck[0].id);
+            this.displayBio(this.game.players[1].deck[0]);
           }
         } else {
           if (element.id === "card-inner1") {
@@ -153,11 +153,35 @@ class UI {
       : this.turnCard(document.querySelector("#card-inner2"));
   }
 
-  displayBio(id) {
+  displayBio(hero) {
     const modal = document.querySelector("#myModal");
     modal.style.display = "block";
-    modal.addEventListener("click", () => modal.style.display = "none");
+    modal.addEventListener("click", () => (modal.style.display = "none"));
 
+    const modalHeader = document.querySelector(".modal-header");
+    modalHeader.innerHTML = `
+    <h2>${hero.name}</h2>`;
+
+    const modalBody = document.querySelector(".modal-body");
+    modalBody.innerHTML = `
+      <ul>
+      <li>A.K.A: ${hero.biography.aliases}</li> 
+      <li>First Appearance: ${hero.biography.firstAppearance}</li>
+        <li>Publisher: ${hero.biography.publisher}</li>
+        <hr>
+        <li>Gender: ${hero.appearance.gender}</li>
+        <li>Race: ${hero.appearance.race}</li>
+        <hr>
+        <li>Occupation: ${hero.work.occupation}</li>
+        <li>Base: ${hero.work.base}</li>
+      </ul>
+    `;
+
+    const modalFooter = document.querySelector(".modal-footer");
+    modalFooter.innerHTML = `
+    <h3>Alignment: ${hero.biography.alignment}</h3>
+
+    `;
   }
 }
 

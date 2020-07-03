@@ -31,29 +31,19 @@ class Heroclash {
 
   //start the game with the chosen deckSize
   start(deckSize) {
-    let herodata;
-    let images;
     let heroes;
 
     //load herodata from localStorage
-    herodata = JSON.parse(localStorage.getItem("allHeroes"));
-    images = JSON.parse(localStorage.getItem("allImages"));
     heroes = JSON.parse(localStorage.getItem("heroes"));
 
-    //merge data from images into herodata:
-    herodata.forEach((hero, index) => {
-      let image = images[index].url;
-      hero.image = image;
-    });
-
     //store the id of all drawn characters:
-    let ids = [];
+    const ids = [];
 
     //draw the decks for the players:
     this.players.forEach((player) => {
       while (player.deck.length < deckSize) {
-        let id = Math.floor(Math.random() * 563);
-        while (!ids.includes(id)) {
+        const id = Math.floor(Math.random() * 563);
+        if (!ids.includes(id)) {
           player.deck.push(heroes[id]);
           ids.push(id);
         }
