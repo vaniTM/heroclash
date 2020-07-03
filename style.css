@@ -135,7 +135,7 @@ button {
 
 h2 {
   margin: 3px;
-  padding: 0px;
+  padding: 0;
   pointer-events: none;
 }
 
@@ -143,7 +143,7 @@ ul {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin: 0px;
+  margin: 0;
   padding: 1px;
   pointer-events: none;
 }
@@ -204,20 +204,6 @@ html {
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
 /* Modal Header */
 .modal-header {
   padding: 2px 16px;
@@ -240,6 +226,7 @@ html {
 /* Modal Content */
 .modal-content {
   position: relative;
+  top: 50px;
   background-color: #fefefe;
   margin: auto;
   padding: 0;
@@ -257,7 +244,7 @@ html {
     opacity: 0;
   }
   to {
-    top: 0;
+    top: 50px;
     opacity: 1;
   }
 }
