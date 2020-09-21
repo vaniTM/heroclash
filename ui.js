@@ -18,11 +18,11 @@ class UI {
     if (localStorage.getItem("allHeroes") === null) {
       this.game.loadData().then(location.reload);
     }
-    this.game.start(15);
+    this.game.start(280);
 
     this.updateState();
-    this.startTurn();
     this.updateCards();
+    this.startTurn();
 
     console.log(this.game);
 
@@ -47,7 +47,7 @@ class UI {
             this.turnCard(document.querySelector("#card-inner1"));
           }
 
-          let that = this;
+          const that = this;
           setTimeout(function () {
             that.game.handleCombat(event.target.classList[0]);
             that.turnCard(document.querySelector("#card-inner1"));
@@ -81,11 +81,11 @@ class UI {
 
   //display the active card of the two players:
   updateCards() {
-    let cards = document.querySelectorAll(".card-inner");
+    const cards = document.querySelectorAll(".card-inner");
     cards.forEach((card, index) => {
-      let activeCard = this.game.players[index].deck[0];
-      let stats = this.game.players[index].deck[0].powerstats;
-      let images = this.game.players[index].deck[0].images;
+      const activeCard = this.game.players[index].deck[0];
+      const stats = this.game.players[index].deck[0].powerstats;
+      const images = this.game.players[index].deck[0].images;
       card.innerHTML = `
             <div class="card-front">
               <img
