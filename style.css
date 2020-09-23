@@ -118,7 +118,7 @@ button {
 
 /* Style the back side */
 .card-back {
-  background-color: dodgerblue;
+  background-color: rgb(26, 46, 60);
   color: white;
   transform: rotateY(180deg);
 }

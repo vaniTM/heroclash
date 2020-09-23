@@ -86,6 +86,18 @@ class UI {
       const activeCard = this.game.players[index].deck[0];
       const stats = this.game.players[index].deck[0].powerstats;
       const images = this.game.players[index].deck[0].images;
+      const alignment = this.game.players[index].deck[0].biography.alignment;
+
+      let color = this.setColor(activeCard);
+
+      // if (alignment === "good") {
+      //   color += "#80ccd8";
+      // } else if (alignment === "bad") {
+      //   color += "#e4003a";
+      // } else {
+      //   color += "f7a823";
+      // }
+
       card.innerHTML = `
             <div class="card-front">
               <img
@@ -94,7 +106,7 @@ class UI {
                 alt="A red Playing Card"
               />
             </div>
-            <div class="card-back">
+            <div class="card-back" style="background-color:${color}">
               <div class="card-image">
                 <img
                   class="image"
@@ -153,12 +165,26 @@ class UI {
       : this.turnCard(document.querySelector("#card-inner2"));
   }
 
+  setColor(card) {
+    const alignment = card.biography.alignment;
+    let color = "";
+    if (alignment === "good") {
+      color += "#80ccd8";
+    } else if (alignment === "bad") {
+      color += "#e4003a";
+    } else {
+      color += "#f7a823";
+    }
+    return color;
+  }
+
   displayBio(hero) {
     const modal = document.querySelector("#myModal");
     modal.style.display = "block";
     modal.addEventListener("click", () => (modal.style.display = "none"));
 
     const modalHeader = document.querySelector(".modal-header");
+    modalHeader.style.backgroundColor = this.setColor(hero);
     modalHeader.innerHTML = `
     <h2>${hero.name}</h2>`;
 
@@ -178,6 +204,7 @@ class UI {
     `;
 
     const modalFooter = document.querySelector(".modal-footer");
+    modalFooter.style.backgroundColor = this.setColor(hero);
     modalFooter.innerHTML = `
     <h3>Alignment: ${hero.biography.alignment}</h3>
 
