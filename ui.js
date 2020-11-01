@@ -15,52 +15,51 @@ class UI {
   constructor() {
     this.game = new Heroclash();
 
-    if (localStorage.getItem("allHeroes") === null) {
-      this.game.loadData().then(location.reload);
-    }
-    this.game.start(280);
+    this.game.loadData().then(() => {
+      this.game.start(280);
 
-    this.updateState();
-    this.updateCards();
-    this.startTurn();
+      this.updateState();
+      this.updateCards();
+      this.startTurn();
 
-    console.log(this.game);
+      console.log(this.game);
 
-    //handle clicks and combat:
-    let stats = document.querySelectorAll(".card-inner");
-    stats.forEach((element) =>
-      element.addEventListener("click", (event) => {
-        console.log(event.target.classList[0]);
+      //handle clicks and combat:
+      let stats = document.querySelectorAll(".card-inner");
+      stats.forEach((element) =>
+        element.addEventListener("click", (event) => {
+          console.log(event.target.classList[0]);
 
-        if (event.target.classList[0] === "image") {
-          if (element.id === "card-inner1") {
-            this.displayBio(this.game.players[0].deck[0]);
-          }
-          if (element.id === "card-inner2") {
-            this.displayBio(this.game.players[1].deck[0]);
-          }
-        } else {
-          if (element.id === "card-inner1") {
-            this.turnCard(document.querySelector("#card-inner2"));
-          }
-          if (element.id === "card-inner2") {
-            this.turnCard(document.querySelector("#card-inner1"));
-          }
+          if (event.target.classList[0] === "image") {
+            if (element.id === "card-inner1") {
+              this.displayBio(this.game.players[0].deck[0]);
+            }
+            if (element.id === "card-inner2") {
+              this.displayBio(this.game.players[1].deck[0]);
+            }
+          } else {
+            if (element.id === "card-inner1") {
+              this.turnCard(document.querySelector("#card-inner2"));
+            }
+            if (element.id === "card-inner2") {
+              this.turnCard(document.querySelector("#card-inner1"));
+            }
 
-          const that = this;
-          setTimeout(function () {
-            that.game.handleCombat(event.target.classList[0]);
-            that.turnCard(document.querySelector("#card-inner1"));
-            that.turnCard(document.querySelector("#card-inner2"));
+            const that = this;
             setTimeout(function () {
-              that.updateState();
-              that.updateCards();
-              that.startTurn();
-            }, 1000);
-          }, 1700);
-        }
-      })
-    );
+              that.game.handleCombat(event.target.classList[0]);
+              that.turnCard(document.querySelector("#card-inner1"));
+              that.turnCard(document.querySelector("#card-inner2"));
+              setTimeout(function () {
+                that.updateState();
+                that.updateCards();
+                that.startTurn();
+              }, 1000);
+            }, 1700);
+          }
+        })
+      );
+    });
   }
 
   updateState() {
