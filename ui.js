@@ -1,16 +1,6 @@
 // Copyright (C) 2020  Markus Seiwald, GPLv3
 
 class UI {
-  game;
-
-  //stat classes (for clicks to choose next duel discipline):
-  intelligence = document.querySelectorAll(".intelligence");
-  strength = document.querySelectorAll(".strength");
-  speed = document.querySelectorAll(".speed");
-  durability = document.querySelectorAll(".durability");
-  power = document.querySelectorAll(".power");
-  combat = document.querySelectorAll(".combat");
-
   //start everything off with this constructor:
   constructor() {
     this.game = new Heroclash();
@@ -26,8 +16,8 @@ class UI {
 
       //handle clicks and combat:
       let stats = document.querySelectorAll(".card-inner");
-      stats.forEach((element) =>
-        element.addEventListener("click", (event) => {
+      stats.forEach(element =>
+        element.addEventListener("click", event => {
           console.log(event.target.classList[0]);
 
           if (event.target.classList[0] === "image") {
@@ -46,11 +36,11 @@ class UI {
             }
 
             const that = this;
-            setTimeout(function () {
+            setTimeout(function() {
               that.game.handleCombat(event.target.classList[0]);
               that.turnCard(document.querySelector("#card-inner1"));
               that.turnCard(document.querySelector("#card-inner2"));
-              setTimeout(function () {
+              setTimeout(function() {
                 that.updateState();
                 that.updateCards();
                 that.startTurn();
@@ -193,10 +183,8 @@ class UI {
       <li>A.K.A: ${hero.biography.aliases}</li> 
       <li>First Appearance: ${hero.biography.firstAppearance}</li>
         <li>Publisher: ${hero.biography.publisher}</li>
-        <hr>
         <li>Gender: ${hero.appearance.gender}</li>
         <li>Race: ${hero.appearance.race}</li>
-        <hr>
         <li>Occupation: ${hero.work.occupation}</li>
         <li>Base: ${hero.work.base}</li>
       </ul>

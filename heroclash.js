@@ -40,7 +40,7 @@ class Heroclash {
     const ids = [];
 
     //draw the decks for the players:
-    this.players.forEach((player) => {
+    this.players.forEach(player => {
       while (player.deck.length < deckSize) {
         const id = Math.floor(Math.random() * 563);
         if (!ids.includes(id)) {

@@ -1,50 +1,51 @@
 /* Copyright (C) 2020  Markus Seiwald, GPLv3 */
 
-/* * {
-  border: 1px solid darkred;
-} */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px solid darkred; */
+}
 
 body {
   /* global variables: */
 
+  font-family: Lato, sans-serif;
+}
+
+.gamescreen {
+  height: 100%;
   display: grid;
-  grid-template-areas:
-    "header header header header header"
-    ". card1 state card2 .";
-  grid-template-rows: 200px 1fr;
   grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
-  align-items: center;
+  grid-template-rows: 1fr;
+  grid-template-areas: ". card1 state card2 .";
   justify-items: center;
-
-  /* generally useful stuff */
-  height: 100vh;
-  margin: 0;
-  /* overflow: hidden; */
-  box-sizing: border-box;
-
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  align-items: center;
 }
 
 /* Stack the layout on small devices/viewports. */
 @media all and (max-width: 1000px) {
-  body {
+  .gamescreen {
+    grid-template-rows: 1fr 70px 1fr;
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "header"
       "card1"
       "state"
       "card2";
-    grid-template-rows: 80px 1fr 70px 1fr;
-    grid-template-columns: 1fr;
   }
 }
 
 header {
   grid-area: header;
   display: flex;
+  height: 100px;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
-
+main {
+  height: 80vh;
+}
 /* main {
   display: flex;
   flex-direction: column;
@@ -160,12 +161,11 @@ ul {
 
 .card li {
   display: flex;
-  width: 100%;
-  border: 1px solid black;
+  align-items: center;
+  border: 1px solid #555;
   border-radius: 2px;
-  margin: 3px;
-  padding: 3px;
-  max-width: 140px;
+  margin: 2px;
+  padding: 3px 5px;
   pointer-events: all;
   cursor: pointer;
 }
@@ -179,10 +179,6 @@ span {
   pointer-events: none;
 }
 
-html {
-  font-size: 100%;
-}
-
 #game-state {
   grid-area: state;
   max-width: 330px;
@@ -193,6 +189,7 @@ html {
 
 #game-state * {
   margin: 20px;
+  text-align: center;
 }
 
 #card1 {
@@ -227,6 +224,11 @@ html {
 /* Modal Body */
 .modal-body {
   padding: 2px 16px;
+  line-height: 1.4rem;
+}
+
+.modal li {
+  list-style-type: none;
 }
 
 /* Modal Footer */
@@ -259,17 +261,5 @@ html {
   to {
     top: 50px;
     opacity: 1;
-  }
-}
-
-@media only screen and (max-width: 460px) {
-  html {
-    font-size: 80%;
-  }
-}
-
-@media only screen and (max-width: 320px) {
-  html {
-    font-size: 70%;
   }
 }
