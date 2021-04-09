@@ -2,11 +2,14 @@
 
 class UI {
   //start everything off with this constructor:
-  constructor() {
+  constructor(inut) {
     this.game = new Heroclash();
 
+    var numberOfCards = document.querySelector("#numberOfCards").value;
+    console.log(numberOfCards);
+
     this.game.loadData().then(() => {
-      this.game.start(280);
+      this.game.start(numberOfCards);
 
       this.updateState();
       this.updateCards();
@@ -199,4 +202,14 @@ class UI {
   }
 }
 
+const start = document.getElementById("start");
+start.addEventListener("click", showGamescreen);
+
+function showGamescreen() {
+document.querySelector(".menu").style.display = "none";
+document.querySelector(".gamescreen").style.display = "grid";
 ui = new UI();
+}
+
+
+
